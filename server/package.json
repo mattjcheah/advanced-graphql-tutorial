@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon -r dotenv/config -r esm ./src/index.js"
+    "dev": "concurrently -k npm:dev:*",
+    "dev:accounts": "nodemon -r dotenv/config -r esm ./src/services/accounts/index.js",
+    "dev:gateway": "wait-on tcp:4001 && nodemon -r dotenv/config -r esm ./src/index.js"
   },
   "keywords": [],
   "author": "",
@@ -17,9 +19,11 @@
     "dotenv": "^8.2.0",
     "esm": "^3.2.25",
     "express": "^4.17.1",
-    "graphql": "^14.7.0"
+    "graphql": "^14.7.0",
+    "wait-on": "^4.0.0"
   },
   "devDependencies": {
+    "concurrently": "^5.0.2",
     "nodemon": "^1.19.4"
   }
 }
